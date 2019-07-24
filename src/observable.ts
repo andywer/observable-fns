@@ -204,7 +204,7 @@ class Subscription<T> {
   }
 }
 
-class SubscriptionObserver<T> {
+export class SubscriptionObserver<T> {
   public _subscription: Subscription<T>
 
   constructor(subscription: Subscription<T>) { this._subscription = subscription }
