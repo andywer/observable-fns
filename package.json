@@ -1,0 +1,25 @@
+{
+  "name": "observable-fns",
+  "version": "0.0.0",
+  "description": "Light-weight observable implementation and utils written in TypeScript. Based on zen-observable.",
+  "author": "Andy Wermke (https://github.com/andywer)",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist/",
+    "build": "tsc",
+    "test": "tslint --project .",
+    "prepare": "run-s build"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
+  },
+  "files": [
+    "dist/**",
+    "*.d.ts",
+    "*.js"
+  ]
+}
