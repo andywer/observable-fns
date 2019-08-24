@@ -1,3 +1,4 @@
+import filter from "./filter"
 import flatMap from "./flatMap"
 import map from "./map"
 import multicast from "./multicast"
@@ -9,6 +10,7 @@ import Subject from "./subject"
 export {
   Observable,
   Subject,
+  filter,
   flatMap,
   map,
   multicast
