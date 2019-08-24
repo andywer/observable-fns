@@ -1,32 +1,36 @@
 import Observable, { SubscriptionObserver } from "./observable"
 
-class Subject<T> extends Observable<T> {
-  private observers: Set<SubscriptionObserver<T>> = new Set()
+// TODO: This observer iteration approach looks inelegant and expensive
+// Idea: Come up with super class for Subscription that contains the
+//       notify*, ... methods and use it here
+
+class MulticastSubject<T> extends Observable<T> {
+  private _observers: Set<SubscriptionObserver<T>> = new Set()
 
   constructor() {
     super(observer => {
-      this.observers.add(observer)
-      return () => this.observers.delete(observer)
+      this._observers.add(observer)
+      return () => this._observers.delete(observer)
     })
   }
 
-  complete() {
-    for (const observer of this.observers) {
-      observer.complete()
+  next(value: T) {
+    for (const observer of this._observers) {
+      observer.next(value)
     }
   }
 
   error(error: any) {
-    for (const observer of this.observers) {
+    for (const observer of this._observers) {
       observer.error(error)
     }
   }
 
-  next(value: T) {
-    for (const observer of this.observers) {
-      observer.next(value)
+  complete() {
+    for (const observer of this._observers) {
+      observer.complete()
     }
   }
 }
 
-export default Subject
+export default MulticastSubject

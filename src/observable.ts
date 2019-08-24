@@ -165,7 +165,7 @@ function onNotify<T>(subscription: Subscription<T>, type: "next" | "error" | "co
 }
 
 
-class Subscription<T> {
+export class Subscription<T> {
   public _cleanup?: ReturnType<Subscriber<T>>
   public _observer?: Observer<T>
   public _queue?: Array<{ type: "next" | "error" | "complete", value: any }>
@@ -205,7 +205,7 @@ class Subscription<T> {
 }
 
 export class SubscriptionObserver<T> {
-  public _subscription: Subscription<T>
+  private _subscription: Subscription<T>
 
   constructor(subscription: Subscription<T>) { this._subscription = subscription }
   get closed() { return this._subscription._state === 'closed' }
@@ -216,7 +216,7 @@ export class SubscriptionObserver<T> {
 
 export class Observable<T> {
   public [Symbol.observable]: () => this
-  public _subscriber: Subscriber<T>
+  private _subscriber: Subscriber<T>
 
   constructor(subscriber: Subscriber<T>) {
     if (!(this instanceof Observable))
@@ -230,15 +230,47 @@ export class Observable<T> {
 
   subscribe(onNext: (value: T) => void, onError?: (error: any) => void, onComplete?: () => void): Subscription<T>
   subscribe(observer: Observer<T>): Subscription<T>
-  subscribe(observer: Observer<T> | ((value: T) => void), onError?: (error: any) => void, onComplete?: () => void): Subscription<T> {
-    if (typeof observer !== 'object' || observer === null) {
-      observer = {
-        next: observer,
-        error: arguments[1],
-        complete: arguments[2],
+  subscribe(nextOrObserver: Observer<T> | ((value: T) => void), onError?: (error: any) => void, onComplete?: () => void): Subscription<T> {
+    if (typeof nextOrObserver !== 'object' || nextOrObserver === null) {
+      nextOrObserver = {
+        next: nextOrObserver,
+        error: onError,
+        complete: onComplete
       };
     }
-    return new Subscription(observer, this._subscriber);
+    return new Subscription(nextOrObserver, this._subscriber);
+  }
+
+  tap(onNext: (value: T) => void, onError?: (error: any) => void, onComplete?: () => void): Observable<T>
+  tap(observer: Observer<T>): Observable<T>
+  tap(nextOrObserver: Observer<T> | ((value: T) => void), onError?: (error: any) => void, onComplete?: () => void): Observable<T> {
+    const tapObserver = typeof nextOrObserver !== 'object' || nextOrObserver === null
+      ? {
+        next: nextOrObserver,
+        error: onError,
+        complete: onComplete
+      }
+      : nextOrObserver
+
+    return new Observable<T>(observer => {
+      return this.subscribe({
+        next(value) {
+          tapObserver.next && tapObserver.next(value)
+          observer.next(value)
+        },
+        error(error) {
+          tapObserver.error && tapObserver.error(error)
+          observer.error(error)
+        },
+        complete() {
+          tapObserver.complete && tapObserver.complete()
+          observer.complete()
+        },
+        start(subscription) {
+          tapObserver.start && tapObserver.start(subscription)
+        }
+      })
+    })
   }
 
   forEach(fn: (value: T, done: UnsubscribeFn) => void) {
@@ -286,7 +318,7 @@ export class Observable<T> {
     }));
   }
 
-  filter<R extends T>(fn: (value: T) => value is R) {
+  filter<R extends T>(fn: (value: T) => boolean) {
     if (typeof fn !== 'function')
       throw new TypeError(fn + ' is not a function');
 
@@ -296,7 +328,7 @@ export class Observable<T> {
       next(value) {
         try { if (!fn(value)) return; }
         catch (e) { return observer.error(e) }
-        observer.next(value);
+        observer.next(value as R);
       },
       error(e) { observer.error(e) },
       complete() { observer.complete() },
