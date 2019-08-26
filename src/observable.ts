@@ -3,7 +3,7 @@
  * At commit: f63849a8c60af5d514efc8e9d6138d8273c49ad6
  */
 
-import { getSymbol, hasSymbol, hasSymbols } from "./symbols"
+import { getSymbol, hasSymbol, hasSymbols } from "./_symbols"
 
 export type UnsubscribeFn = () => void
 export type Subscriber<T> = (observer: SubscriptionObserver<T>) => (UnsubscribeFn | Subscription<any> | void)

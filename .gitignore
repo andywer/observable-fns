@@ -8,3 +8,5 @@ test/webpack/dist*
 .DS_Store
 Thumbs.db
 *.log
+/*.d.ts
+/*.js

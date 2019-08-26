@@ -1,5 +1,5 @@
 import Observable from "./observable"
-import { isAsyncIterator, isIterator } from "./util"
+import { isAsyncIterator, isIterator } from "./_util"
 
 function flatMap<In, Out>(
   observable: Observable<In>,

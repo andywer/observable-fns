@@ -7,8 +7,9 @@
   "scripts": {
     "prebuild": "rimraf dist/",
     "build": "tsc",
+    "create-entrypoints": "rimraf *.js *.d.ts && node ./scripts/create-entrypoints.js",
     "test": "tslint --project .",
-    "prepare": "run-s build"
+    "prepare": "run-s build create-entrypoints"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
