@@ -41,7 +41,7 @@ The aim is to provide a lean, friendly observable implementation with a small fo
 ## Installation
 
 ```
-npm install observable-fns
+npm install @andywer/observable-fns
 ```
 
 ## Usage
