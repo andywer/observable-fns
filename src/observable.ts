@@ -9,7 +9,7 @@ export type UnsubscribeFn = () => void
 export type Subscriber<T> = (observer: SubscriptionObserver<T>) => (UnsubscribeFn | Subscription<any> | void)
 
 export interface ObservableLike<T> {
-  subscribe?: Subscriber<T>;
+  subscribe: (observer: SubscriptionObserver<T>) => (UnsubscribeFn | { unsubscribe: UnsubscribeFn } | void);
   [Symbol.observable](): Observable<T> | ObservableLike<T>;
 }
 
