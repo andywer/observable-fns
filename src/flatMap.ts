@@ -1,8 +1,8 @@
-import Observable from "./observable"
-import { isAsyncIterator, isIterator } from "./_util"
+import { isAsyncIterator, isIterator, unsubscribe } from "./_util"
+import Observable, { ObservableLike } from "./observable"
 
 function flatMap<In, Out>(
-  observable: Observable<In>,
+  observable: ObservableLike<In>,
   mapper: (input: In) => Promise<Out[]> | AsyncIterableIterator<Out> | IterableIterator<Out> | Out[]
 ): Observable<Out> {
   return new Observable<Out>(observer => {
@@ -28,7 +28,7 @@ function flatMap<In, Out>(
         handleValue(input).catch(handleError)
       }
     })
-    return () => subscription.unsubscribe()
+    return () => unsubscribe(subscription)
   })
 }
 
