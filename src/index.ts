@@ -1,3 +1,4 @@
+import { unsubscribe } from "./_util"
 import filter from "./filter"
 import flatMap from "./flatMap"
 import map from "./map"
@@ -14,7 +15,8 @@ export {
   filter,
   flatMap,
   map,
-  multicast
+  multicast,
+  unsubscribe
 }
 
 // Export only the type, not the class itself

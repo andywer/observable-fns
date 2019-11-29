@@ -1,7 +1,8 @@
-import Observable from "./observable"
+import { unsubscribe } from "./_util"
+import Observable, { ObservableLike } from "./observable"
 
 function filter<Out, In extends Out>(
-  observable: Observable<In>,
+  observable: ObservableLike<In>,
   test: (input: In) => Promise<boolean> | boolean
 ): Observable<Out> {
   return new Observable<Out>(observer => {
@@ -22,7 +23,7 @@ function filter<Out, In extends Out>(
         handleValue(input).catch(handleError)
       }
     })
-    return () => subscription.unsubscribe()
+    return () => unsubscribe(subscription)
   })
 }
 

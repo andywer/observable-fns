@@ -1,7 +1,8 @@
-import Observable from "./observable"
+import { unsubscribe } from "./_util"
+import Observable, { ObservableLike } from "./observable"
 
 function map<In, Out>(
-  observable: Observable<In>,
+  observable: ObservableLike<In>,
   mapper: (input: In) => Promise<Out> | Out
 ): Observable<Out> {
   return new Observable<Out>(observer => {
@@ -21,7 +22,7 @@ function map<In, Out>(
         handleValue(input).catch(handleError)
       }
     })
-    return () => subscription.unsubscribe()
+    return () => unsubscribe(subscription)
   })
 }
 
