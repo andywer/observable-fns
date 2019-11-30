@@ -44,6 +44,7 @@ function multicast<T>(coldObservable: ObservableLike<T>): Observable<T> {
       // Close source subscription once last subscriber has unsubscribed
       if (subscriberCount === 0) {
         unsubscribe(sourceSubscription)
+        sourceSubscription = undefined
       }
     }
   })
