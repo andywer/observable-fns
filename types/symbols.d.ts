@@ -1,3 +1,3 @@
 declare interface SymbolConstructor {
-  observable: symbol
+  readonly observable: symbol
 }

@@ -7,7 +7,7 @@ function flatMap<In, Out>(
 ): Observable<Out> {
   return new Observable<Out>(observer => {
     const handleValue = async (input: In) => {
-      let mapped = await mapper(input)
+      const mapped = await mapper(input)
       if (isIterator(mapped) || isAsyncIterator(mapped)) {
         for await (const element of mapped) {
           observer.next(element)

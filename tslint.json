@@ -5,12 +5,15 @@
   ],
   "jsRules": {},
   "rules": {
+    "ban-types": false,
     "curly": [true, "ignore-same-line"],
     "interface-name": [
       true,
       "never-prefix"
     ],
     "interface-over-type-literal": false,
+    "max-classes-per-file": false,
+    "member-access": false,
     "member-ordering": false,
     "no-implicit-dependencies": [
       true,
@@ -18,6 +21,10 @@
     ],
     "no-reference": false,
     "no-submodule-imports": false,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
     "object-literal-sort-keys": false,
     "only-arrow-functions": false,
     "ordered-imports": [
@@ -26,7 +33,11 @@
         "named-imports-order": "lowercase-first"
       }
     ],
-    "semicolon": false
+    "quotemark": [true, "double"],
+    "semicolon": [true, "never"],
+    "variable-name": {
+      "options": ["allow-leading-underscore", "allow-pascal-case"]
+    }
   },
   "rulesDirectory": []
 }
