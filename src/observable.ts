@@ -57,7 +57,7 @@ function hostReportError(error: Error) {
   if ((hostReportError as any).log) {
     (hostReportError as any).log(error);
   } else {
-    setTimeout(() => { throw error });
+    setTimeout(() => { throw error }, 0);
   }
 }
 
