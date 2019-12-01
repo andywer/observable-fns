@@ -1,6 +1,11 @@
-# observable-fns
+<h1 align="center">
+  🕵️‍♀️ @andywer/observable-fns
+</h1>
 
-*Not yet ready for production.*
+<p align="center">
+  <a href="https://travis-ci.org/andywer/observable-fns" target="_blank"><img alt="Build status" src="https://img.shields.io/travis/andywer/observable-fns/master.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm (tag)" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
+</p>
 
 Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript.
 
