@@ -3,7 +3,9 @@ export const hasSymbol = (name: string): boolean => hasSymbols() && Boolean((Sym
 export const getSymbol = (name: string): symbol | string => hasSymbol(name) ? (Symbol as any)[name] : "@@" + name
 
 export function registerObservableSymbol() {
-  if (hasSymbols() && !hasSymbol('observable')) {
-    Symbol.observable = Symbol('observable');
+  if (hasSymbols() && !hasSymbol("observable")) {
+    (Symbol as any).observable = Symbol("observable")
   }
 }
+
+(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator")
