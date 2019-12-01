@@ -1,3 +1,4 @@
+import { AsyncSerialScheduler } from "./_scheduler"
 import Observable, { ObservableLike } from "./observable"
 import unsubscribe from "./unsubscribe"
 
@@ -6,20 +7,20 @@ function map<In, Out>(
   mapper: (input: In) => Promise<Out> | Out
 ): Observable<Out> {
   return new Observable<Out>(observer => {
-    const handleValue = async (value: In) => {
-      const mapped = await mapper(value)
-      observer.next(mapped)
-    }
-    const handleError = observer.error.bind(observer)
+    const scheduler = new AsyncSerialScheduler(observer)
+
     const subscription = observable.subscribe({
       complete() {
-        observer.complete()
+        scheduler.complete()
       },
       error(error) {
-        observer.error(error)
+        scheduler.error(error)
       },
       next(input) {
-        handleValue(input).catch(handleError)
+        scheduler.schedule(async next => {
+          const mapped = await mapper(input)
+          next(mapped)
+        })
       }
     })
     return () => unsubscribe(subscription)
