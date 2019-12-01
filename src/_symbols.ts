@@ -7,3 +7,5 @@ export function registerObservableSymbol() {
     (Symbol as any).observable = Symbol("observable")
   }
 }
+
+(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator")
