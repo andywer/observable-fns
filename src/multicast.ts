@@ -1,6 +1,6 @@
-import { unsubscribe } from "./_util"
 import Observable, { ObservableLike } from "./observable"
 import Subject from "./subject"
+import unsubscribe from "./unsubscribe"
 
 // TODO: Subject already creates additional observables "under the hood",
 //       now we introduce even more. A true native MulticastObservable

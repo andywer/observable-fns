@@ -1,5 +1,5 @@
-import { unsubscribe } from "./_util"
 import Observable, { ObservableLike } from "./observable"
+import unsubscribe from "./unsubscribe"
 
 function map<In, Out>(
   observable: ObservableLike<In>,

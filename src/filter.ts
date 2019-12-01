@@ -1,5 +1,5 @@
-import { unsubscribe } from "./_util"
 import Observable, { ObservableLike } from "./observable"
+import unsubscribe from "./unsubscribe"
 
 function filter<Out, In extends Out>(
   observable: ObservableLike<In>,

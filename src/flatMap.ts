@@ -1,5 +1,6 @@
-import { isAsyncIterator, isIterator, unsubscribe } from "./_util"
+import { isAsyncIterator, isIterator } from "./_util"
 import Observable, { ObservableLike } from "./observable"
+import unsubscribe from "./unsubscribe"
 
 function flatMap<In, Out>(
   observable: ObservableLike<In>,
