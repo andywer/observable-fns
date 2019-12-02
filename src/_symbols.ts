@@ -8,4 +8,6 @@ export function registerObservableSymbol() {
   }
 }
 
-(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator")
+if (!hasSymbol("asyncIterator")) {
+  (Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator")
+}
