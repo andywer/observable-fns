@@ -7,7 +7,7 @@
   <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm (tag)" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
 </p>
 
-Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript.
+Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript. Zero dependencies.
 
 For a quick introduction on how to use observables, check out the [zen-observable readme](https://github.com/zenparsing/zen-observable).
 
