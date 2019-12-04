@@ -3,7 +3,6 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "declaration": true,
-    "esModuleInterop": true,
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",

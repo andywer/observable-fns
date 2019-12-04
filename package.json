@@ -5,9 +5,12 @@
   "author": "Andy Wermke (https://github.com/andywer)",
   "license": "MIT",
   "repository": "github:andywer/observable-fns",
+  "module": "./dist.esm/index.js",
   "scripts": {
     "prebuild": "rimraf dist/",
-    "build": "tsc",
+    "build": "run-s build:cjs build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
     "create-entrypoints": "rimraf *.js *.d.ts && node ./scripts/create-entrypoints.js",
     "test": "ava",
     "posttest": "tslint --project .",
@@ -36,6 +39,7 @@
   },
   "files": [
     "dist/**",
+    "dist.*/**",
     "*.d.ts",
     "*.js"
   ]
