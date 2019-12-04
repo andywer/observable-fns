@@ -9,6 +9,10 @@
 
 Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript. Zero dependencies.
 
+An observable is basically a stream of asynchronously emitted values that you can subscribe to. In a sense it is to the event emitter what the promise is to the callback.
+
+The main difference to a promise is that a promise only resolves once, whereas observables can yield different values repeatedly. They can also fail and yield an error, like a promise, and they come with a completion event to indicate that the last value has been sent.
+
 For a quick introduction on how to use observables, check out the [zen-observable readme](https://github.com/zenparsing/zen-observable).
 
 ```js
@@ -19,17 +23,11 @@ function subscribeToServerSentEvents(url) {
   // subscribers will share the same event source
   return multicast(new Observable(observer => {
     const eventStream = new EventSource(url)
-    const handleError = observer.error.bind(observer)
-    const handleMessage = observer.next.bind(observer)
 
-    eventStream.addEventListener("message", handleMessage)
-    eventStream.addEventListener("error", handleError)
+    eventStream.addEventListener("message", message => observer.next(message))
+    eventStream.addEventListener("error", error => observer.error(error))
 
-    return () => {
-      eventStream.removeEventListener("message", handleMessage)
-      eventStream.removeEventListener("error", handleError)
-      eventStream.close()
-    }
+    return () => eventStream.close()
   }))
 }
 
@@ -39,7 +37,7 @@ subscribeToServerSentEvents("http://localhost:3000/events")
 
 ### Philosophy
 
-Keep the observable implementation itself minimal, ship the utility functions loosely coupled, so they can be imported as needed.
+Keep the observable implementation itself lean, ship the utility functions loosely coupled, so they can be imported as needed.
 
 The aim is to provide a lean, friendly observable implementation with a small footprint that's fit to be used in libraries.
 
@@ -62,6 +60,22 @@ If you write front-end code and care about bundle size, you can either depend on
 ```js
 import Observable from "@andywer/observable-fns/observable"
 import flatMap from "@andywer/observable-fns/flatMap"
+```
+
+Functions like `filter()`, `flatMap()`, `map()` accept asynchronous handlers – this can be a big win compared to the usual methods on `Observable.prototype` that only work with synchronous handlers.
+
+Those functions will also make sure that the values are consistently emitted in the same order as the input observable emitted them.
+
+```js
+import { Observable, filter } from "@andywer/observable-fns"
+
+const existingGitHubUsersObservable = filter(
+  Observable.from(["andywer", "bcdef", "charlie"]),
+  async name => {
+    const response = await fetch(`https://github.com/${name}`)
+    return response.status === 200
+  }
+)
 ```
 
 ## API
