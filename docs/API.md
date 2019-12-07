@@ -46,6 +46,17 @@ function map(
 Maps the values emitted by another observable to different values.
 To be applied to an input observable using `pipe()`.
 
+## merge(...observables): Observable
+
+```ts
+function merge<T>(
+  ...observables: ObservableLike<T>[]
+): Observable<T>
+```
+
+Creates an observable that emits the values emitted by any of its input
+observables. It completes once all input observables completed.
+
 ## multicast(observable): Observable
 
 ```ts
