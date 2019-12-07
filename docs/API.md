@@ -25,6 +25,16 @@ separately.
 Use `flatMap()` to map input values to zero, one or multiple output
 values. To be applied to an input observable using `pipe()`.
 
+## interval(period): Observable
+
+```ts
+function interval(period: number): Observable<number>
+```
+
+Creates an observable that yields a new value every `period` milliseconds.
+The first value emitted is 0, then 1, 2, etc. The first value is not emitted
+ * immediately, but after the first interval.
+
 ## map(mapper): Pipeable
 
 ```ts
