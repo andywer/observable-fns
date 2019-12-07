@@ -222,6 +222,11 @@ export class SubscriptionObserver<T> {
   complete() { onNotify(this._subscription, "complete") }
 }
 
+/**
+ * The basic Observable class. This primitive is used to wrap asynchronous
+ * data streams in a common standardized data type that is interoperable
+ * between libraries and can be composed to represent more complex processes.
+ */
 export class Observable<T> {
   public [Symbol.observable]: () => this
   private _subscriber: Subscriber<T>

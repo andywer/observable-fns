@@ -8,6 +8,9 @@ function filter(
 ): (input: ObservableLike<In>) => Observable<Out>
 ```
 
+Filters the values emitted by another observable.
+To be applied to an input observable using `pipe()`.
+
 ## flatMap(mapper): Pipeable
 
 ```ts
@@ -16,6 +19,12 @@ function flatMap(
 ): (input: ObservableLike<In>) => Observable<Out>
 ```
 
+Maps the values emitted by another observable. In contrast to `map()`
+the `mapper` function returns an array of values that will be emitted
+separately.
+Use `flatMap()` to map input values to zero, one or multiple output
+values. To be applied to an input observable using `pipe()`.
+
 ## map(mapper): Pipeable
 
 ```ts
@@ -23,6 +32,9 @@ function map(
   mapper: (input: In) => Promise<Out>| Out
 ): (input: ObservableLike<In>) => Observable<Out>
 ```
+
+Maps the values emitted by another observable to different values.
+To be applied to an input observable using `pipe()`.
 
 ## multicast(observable): Observable
 
@@ -66,6 +78,10 @@ class Observable<T> {
 }
 ```
 
+The basic Observable class. This primitive is used to wrap asynchronous
+data streams in a common standardized data type that is interoperable
+between libraries and can be composed to represent more complex processes.
+
 ## new Subject()
 
 ```ts
@@ -80,3 +96,15 @@ class Subject<T> extends Observable<T> {
 A subject is a "hot" observable (see `multicast`) that has its observer methods (`.next(value)`, `.error(error)`, `.complete()`) exposed.
 
 Be careful, though! With great power comes great responsibility. Only use the `Subject` when you really need to trigger updates "from the outside" and try to keep the code that can access it to a minimum. Return `Observable.from(mySubject)` to return an observable that cannot easily be mutated.
+
+## unsubscribe(observableLike): void
+
+```ts
+function unsubscribe(
+  subscription: (UnsubscribeFn | { unsubscribe: UnsubscribeFn } | void)
+): void
+
+type UnsubscribeFn = () => void
+```
+
+Unsubscribe from a subscription returned by something that looks like an observable, but is not necessarily our observable implementation.

@@ -2,6 +2,10 @@ import { AsyncSerialScheduler } from "./_scheduler"
 import Observable, { ObservableLike } from "./observable"
 import unsubscribe from "./unsubscribe"
 
+/**
+ * Filters the values emitted by another observable.
+ * To be applied to an input observable using `pipe()`.
+ */
 function filter<Out, In extends Out>(
   test: (input: In) => Promise<boolean> | boolean
 ) {

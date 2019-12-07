@@ -2,6 +2,10 @@ import { AsyncSerialScheduler } from "./_scheduler"
 import Observable, { ObservableLike } from "./observable"
 import unsubscribe from "./unsubscribe"
 
+/**
+ * Maps the values emitted by another observable to different values.
+ * To be applied to an input observable using `pipe()`.
+ */
 function map<In, Out>(
   mapper: (input: In) => Promise<Out> | Out
 ) {
