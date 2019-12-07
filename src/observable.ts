@@ -251,6 +251,56 @@ export class Observable<T> {
     return new Subscription(nextOrObserver, this._subscriber)
   }
 
+  pipe<Out extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Out
+  ): Out
+  pipe<Out extends ObservableLike<any>, Inter1 extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Inter1,
+    second: (input: Inter1) => Out
+  ): Out
+  pipe<Out extends ObservableLike<any>, Inter1 extends ObservableLike<any>, Inter2 extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Inter1,
+    second: (input: Inter1) => Inter2,
+    third: (input: Inter2) => Out
+  ): Out
+  pipe<Out extends ObservableLike<any>, Inter1 extends ObservableLike<any>, Inter2 extends ObservableLike<any>, Inter3 extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Inter1,
+    second: (input: Inter1) => Inter2,
+    third: (input: Inter2) => Inter3,
+    fourth: (input: Inter3) => Out
+  ): Out
+  pipe<Out extends ObservableLike<any>, Inter1 extends ObservableLike<any>, Inter2 extends ObservableLike<any>, Inter3 extends ObservableLike<any>, Inter4 extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Inter1,
+    second: (input: Inter1) => Inter2,
+    third: (input: Inter2) => Inter3,
+    fourth: (input: Inter3) => Inter4,
+    fifth: (input: Inter4) => Out
+  ): Out
+  pipe<Out extends ObservableLike<any>, Inter1 extends ObservableLike<any>, Inter2 extends ObservableLike<any>, Inter3 extends ObservableLike<any>, Inter4 extends ObservableLike<any>, Inter5 extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => Inter1,
+    second: (input: Inter1) => Inter2,
+    third: (input: Inter2) => Inter3,
+    fourth: (input: Inter3) => Inter4,
+    fifth: (input: Inter4) => Inter5,
+    sixth: (input: Inter5) => Out
+  ): Out
+  pipe<never, Out extends ObservableLike<T>>(
+    ...mappers: Array<(input: Out) => Out>
+  ): Out
+  pipe<Out extends ObservableLike<any>>(
+    first: (input: ObservableLike<T>) => ObservableLike<any>,
+    ...mappers: Array<(input: ObservableLike<any>) => ObservableLike<any>>
+  ): Out {
+    // tslint:disable-next-line no-this-assignment
+    let intermediate: ObservableLike<any> = this
+
+    for (const mapper of [first, ...mappers]) {
+      intermediate = mapper(intermediate)
+    }
+
+    return intermediate as Out
+  }
+
   tap(onNext: (value: T) => void, onError?: (error: any) => void, onComplete?: () => void): Observable<T>
   tap(observer: Observer<T>): Observable<T>
   tap(nextOrObserver: Observer<T> | ((value: T) => void), onError?: (error: any) => void, onComplete?: () => void): Observable<T> {

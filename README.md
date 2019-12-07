@@ -7,7 +7,7 @@
   <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm (tag)" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
 </p>
 
-Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript. Zero dependencies.
+Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies.
 
 An observable is basically a stream of asynchronously emitted values that you can subscribe to. In a sense it is to the event emitter what the promise is to the callback.
 
@@ -69,13 +69,13 @@ Those functions will also make sure that the values are consistently emitted in 
 ```js
 import { Observable, filter } from "@andywer/observable-fns"
 
-const existingGitHubUsersObservable = filter(
-  Observable.from(["andywer", "bcdef", "charlie"]),
-  async name => {
-    const response = await fetch(`https://github.com/${name}`)
-    return response.status === 200
-  }
-)
+const existingGitHubUsersObservable = Observable.from(["andywer", "bcdef", "charlie"])
+  .pipe(
+    filter(async name => {
+      const response = await fetch(`https://github.com/${name}`)
+      return response.status === 200
+    })
+  )
 ```
 
 ## API
