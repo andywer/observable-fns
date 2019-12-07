@@ -8,11 +8,17 @@
   <a href="https://bundlephobia.com/result?p=@andywer/observable-fns" target="_blank"><img alt="Complete bundle size" src="https://badgen.net/bundlephobia/min/@andywer/observable-fns"></a>
 </p>
 
-Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
+Light-weight observable implementation and toolbelt functions. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
+
+The aim is to provide a lean, friendly observable implementation with a small footprint that's fit to be used in libraries as an alternative to the huge RxJS.
+
+Find all the provided functions and constructors in the [API documentation](./docs/API.md).
+
+## Observable?
 
 An observable is basically a stream of asynchronously emitted values that you can subscribe to. In a sense it is to the event emitter what the promise is to the callback.
 
-The main difference to a promise is that a promise only resolves once, whereas observables can yield different values repeatedly. They can also fail and yield an error, like a promise, and they come with a completion event to indicate that the last value has been sent.
+The main difference to a promise is that a promise only resolves once, whereas observables can yield values repeatedly. They can also fail with an error, like a promise, and they come with a completion event to indicate that no more values will be send.
 
 For a quick introduction on how to use observables, check out the [zen-observable readme](https://github.com/zenparsing/zen-observable).
 
@@ -33,14 +39,9 @@ function subscribeToServerSentEvents(url) {
 }
 
 subscribeToServerSentEvents("http://localhost:3000/events")
+  .filter(event => !event.isStale)
   .subscribe(event => console.log("Server sent event:", event))
 ```
-
-### Philosophy
-
-Keep the observable implementation itself lean, ship the utility functions loosely coupled, so they can be imported as needed.
-
-The aim is to provide a lean, friendly observable implementation with a small footprint that's fit to be used in libraries.
 
 ## Installation
 
@@ -50,7 +51,7 @@ npm install @andywer/observable-fns
 
 ## Usage
 
-You can import whatever you need directly from the package:
+You can import everything you need directly from the package:
 
 ```js
 import { Observable, flatMap } from "@andywer/observable-fns"
