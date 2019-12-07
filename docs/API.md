@@ -1,36 +1,33 @@
 # observable-fns – API
 
-## filter(observable, test)
+## filter(test): Pipeable
 
 ```ts
 function filter(
-  observable: Observable,
   test: (input: In) => Promise<boolean> | boolean
-): Observable
+): (input: ObservableLike<In>) => Observable<Out>
 ```
 
-## flatMap(observable, mapper)
+## flatMap(mapper): Pipeable
 
 ```ts
 function flatMap(
-  observable: Observable<In>,
   mapper: (input: In) => Promise<Out[]> | AsyncIterableIterator<Out> | IterableIterator<Out> | Out[]
-): Observable<Out>
+): (input: ObservableLike<In>) => Observable<Out>
 ```
 
-## map(observable, mapper)
+## map(mapper): Pipeable
 
 ```ts
 function map(
-  observable: Observable<In>,
   mapper: (input: In) => Promise<Out>| Out
-): Observable<Out>
+): (input: ObservableLike<In>) => Observable<Out>
 ```
 
-## multicast(observable)
+## multicast(observable): Observable
 
 ```ts
-function multicast(observable: Observable<T>): Observable<T>
+function multicast(observable: ObservableLike<T>): Observable<T>
 ```
 
 Takes a "cold" observable and returns a wrapping "hot" observable that proxies the input observable's values and errors.
@@ -57,6 +54,7 @@ class Observable<T> {
     ): Observable<T>
     tap(observer: Observer<T>): Observable<T>
     forEach(fn: (value: T, done: UnsubscribeFn) => void): Promise<unknown>
+    pipe<O>(...fns: Array<(input: ObservableLike<any>) => ObservableLike<O>>): ObservableLike<O>
     map<R>(fn: (value: T) => R): Observable<R>
     filter<R extends T>(fn: (value: T) => boolean): Observable<R>
     reduce<R>(fn: (accumulated: R | T, value: T) => R): Observable<R | T>
