@@ -29,9 +29,10 @@ export class AsyncSerialScheduler<T> {
 
     const next = (value: T) => values.push(value)
 
-    const promise = task(next)
+    const promise = Promise.resolve()
       .then(async () => {
         await prevPromisesCompletion
+        await task(next)
         this._pendingPromises.delete(promise)
 
         for (const value of values) {

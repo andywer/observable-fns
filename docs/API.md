@@ -118,6 +118,23 @@ A subject is a "hot" observable (see `multicast`) that has its observer methods 
 
 Be careful, though! With great power comes great responsibility. Only use the `Subject` when you really need to trigger updates "from the outside" and try to keep the code that can access it to a minimum. Return `Observable.from(mySubject)` to return an observable that cannot easily be mutated.
 
+## scan(accumulator, seed?): Pipeable
+
+```ts
+function scan<In, Out>(
+  accumulator: (accumulated: Out, value: In, index: number) => Out,
+  seed?: Out
+): (input: ObservableLike<In>) => Observable<Out>
+```
+
+Applies an accumulator function over the source Observable, and returns
+each intermediate result. It is basically the same as `.reduce()`, but
+it continuously yields accumulated values, not just after the input
+completed.
+
+If no accumulator seed is supplied then the first input value will be used
+as a seed. To be applied to an input observable using `pipe()`.
+
 ## unsubscribe(observableLike): void
 
 ```ts

@@ -7,6 +7,7 @@ export { default as map } from "./map"
 export { default as merge } from "./merge"
 export { default as multicast } from "./multicast"
 export { default as Observable, ObservableLike } from "./observable"
+export { default as scan } from "./scan"
 export { default as Subject } from "./subject"
 export { default as unsubscribe } from "./unsubscribe"
 
