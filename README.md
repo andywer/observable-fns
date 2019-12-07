@@ -4,10 +4,11 @@
 
 <p align="center">
   <a href="https://travis-ci.org/andywer/observable-fns" target="_blank"><img alt="Build status" src="https://img.shields.io/travis/andywer/observable-fns/master.svg?style=flat-square"></a>
-  <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm (tag)" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm version" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
+  <a href="https://bundlephobia.com/result?p=@andywer/observable-fns" target="_blank"><img alt="Complete bundle size" src="https://badgen.net/bundlephobia/min/@andywer/observable-fns"></a>
 </p>
 
-Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies.
+Light-weight observable implementation (< 7kB minified) and utils. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
 
 An observable is basically a stream of asynchronously emitted values that you can subscribe to. In a sense it is to the event emitter what the promise is to the callback.
 
