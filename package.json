@@ -1,5 +1,5 @@
 {
-  "name": "@andywer/observable-fns",
+  "name": "observable-fns",
   "version": "0.3.1",
   "description": "Light-weight observable implementation and utils written in TypeScript. Based on zen-observable.",
   "author": "Andy Wermke (https://github.com/andywer)",
