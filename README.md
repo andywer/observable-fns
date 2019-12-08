@@ -8,11 +8,29 @@
   <a href="https://bundlephobia.com/result?p=@andywer/observable-fns" target="_blank"><img alt="Complete bundle size" src="https://badgen.net/bundlephobia/min/@andywer/observable-fns"></a>
 </p>
 
-Light-weight observable implementation and toolbelt functions. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript including `.pipe()` and `.tap()`. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
+Light-weight Observable implementation and common toolbelt functions. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
 
-The aim is to provide a lean, friendly observable implementation with a small footprint that's fit to be used in libraries as an alternative to the huge RxJS.
+The aim is to provide a lean Observable implementation with a small footprint that's fit to be used in libraries as an alternative to the huge RxJS.
 
-Find all the provided functions and constructors in the [API documentation](./docs/API.md).
+Find all the provided functions and constructors in the 👉 [API Documentation](./docs/API.md)
+
+<br>
+
+🧩&nbsp;&nbsp;Composable functional streams
+
+🚀&nbsp;&nbsp;map(), filter() & friends support async handlers
+
+🔩&nbsp;&nbsp;Based on popular [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript
+
+🌳&nbsp;&nbsp;Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/)
+
+---
+
+## Installation
+
+```
+npm install @andywer/observable-fns
+```
 
 ## Observable?
 
@@ -41,12 +59,6 @@ function subscribeToServerSentEvents(url) {
 subscribeToServerSentEvents("http://localhost:3000/events")
   .filter(event => !event.isStale)
   .subscribe(event => console.log("Server sent event:", event))
-```
-
-## Installation
-
-```
-npm install @andywer/observable-fns
 ```
 
 ## Usage
