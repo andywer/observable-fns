@@ -1,11 +1,11 @@
 <h1 align="center">
-  🕵️‍♀️ @andywer/observable-fns
+  🕵️‍♀️ observable-fns
 </h1>
 
 <p align="center">
   <a href="https://travis-ci.org/andywer/observable-fns" target="_blank"><img alt="Build status" src="https://img.shields.io/travis/andywer/observable-fns/master.svg?style=flat-square"></a>
-  <a href="https://www.npmjs.com/package/@andywer/observable-fns" target="_blank"><img alt="npm version" src="https://img.shields.io/npm/v/@andywer/observable-fns.svg?style=flat-square"></a>
-  <a href="https://bundlephobia.com/result?p=@andywer/observable-fns" target="_blank"><img alt="Complete bundle size" src="https://badgen.net/bundlephobia/min/@andywer/observable-fns"></a>
+  <a href="https://www.npmjs.com/package/observable-fns" target="_blank"><img alt="npm version" src="https://img.shields.io/npm/v/observable-fns.svg?style=flat-square"></a>
+  <a href="https://bundlephobia.com/result?p=observable-fns" target="_blank"><img alt="Complete bundle size" src="https://badgen.net/bundlephobia/min/observable-fns"></a>
 </p>
 
 Light-weight Observable implementation and common toolbelt functions. Based on [`zen-observable`](https://github.com/zenparsing/zen-observable), re-implemented in TypeScript. Zero dependencies, [tree-shakeable](https://bitsofco.de/what-is-tree-shaking/).
@@ -29,7 +29,7 @@ Find all the provided functions and constructors in the 👉 [API Documentation]
 ## Installation
 
 ```
-npm install @andywer/observable-fns
+npm install observable-fns
 ```
 
 ## Observable?
@@ -41,7 +41,7 @@ The main difference to a promise is that a promise only resolves once, whereas o
 For a quick introduction on how to use observables, check out the [zen-observable readme](https://github.com/zenparsing/zen-observable).
 
 ```js
-import { Observable, multicast } from "@andywer/observable-fns"
+import { Observable, multicast } from "observable-fns"
 
 function subscribeToServerSentEvents(url) {
   // multicast() will make the observable "hot", so multiple
@@ -66,14 +66,14 @@ subscribeToServerSentEvents("http://localhost:3000/events")
 You can import everything you need directly from the package:
 
 ```js
-import { Observable, flatMap } from "@andywer/observable-fns"
+import { Observable, flatMap } from "observable-fns"
 ```
 
 If you write front-end code and care about bundle size, you can either depend on tree-shaking or explicitly import just the parts that you need:
 
 ```js
-import Observable from "@andywer/observable-fns/observable"
-import flatMap from "@andywer/observable-fns/flatMap"
+import Observable from "observable-fns/observable"
+import flatMap from "observable-fns/flatMap"
 ```
 
 Functions like `filter()`, `flatMap()`, `map()` accept asynchronous handlers – this can be a big win compared to the usual methods on `Observable.prototype` that only work with synchronous handlers.
@@ -81,7 +81,7 @@ Functions like `filter()`, `flatMap()`, `map()` accept asynchronous handlers –
 Those functions will also make sure that the values are consistently emitted in the same order as the input observable emitted them.
 
 ```js
-import { Observable, filter } from "@andywer/observable-fns"
+import { Observable, filter } from "observable-fns"
 
 const existingGitHubUsersObservable = Observable.from(["andywer", "bcdef", "charlie"])
   .pipe(
