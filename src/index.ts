@@ -1,4 +1,7 @@
-import { Subscription as SubscriptionClass } from "./observable"
+import {
+  Subscription as SubscriptionClass,
+  SubscriptionObserver as SubscriptionObserverClass
+} from "./observable"
 
 export { default as filter } from "./filter"
 export { default as flatMap } from "./flatMap"
@@ -11,7 +14,8 @@ export { default as scan } from "./scan"
 export { default as Subject } from "./subject"
 export { default as unsubscribe } from "./unsubscribe"
 
-// TODO: function completion(observable: Observable<T>): Promise<void>
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 // Export only the type, not the class itself
 export type Subscription<T> = SubscriptionClass<T>
+export type SubscriptionObserver<T> = Omit<SubscriptionObserverClass<T>, "_subscription">
