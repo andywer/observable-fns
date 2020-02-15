@@ -43,6 +43,7 @@
   "files": [
     "dist/**",
     "dist.*/**",
+    "types/**",
     "*.d.ts",
     "*.js"
   ]
