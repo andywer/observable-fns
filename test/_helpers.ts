@@ -1,6 +1,6 @@
 import { Observable } from "../src/index"
 
-export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+export const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms))
 
 export function completionWithValues<T>(observable: Observable<T>) {
   const values: T[] = []
