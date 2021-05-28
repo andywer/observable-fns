@@ -291,7 +291,7 @@ export class Observable<T> {
     fifth: (input: Inter4) => Inter5,
     sixth: (input: Inter5) => Out
   ): Out
-  pipe<never, Out extends ObservableLike<T>>(
+  pipe<Out extends ObservableLike<T>>(
     ...mappers: Array<(input: Out) => Out>
   ): Out
   pipe<Out extends ObservableLike<any>>(
@@ -349,7 +349,7 @@ export class Observable<T> {
 
       function done() {
         subscription.unsubscribe()
-        resolve()
+        resolve(undefined)
       }
 
       const subscription = this.subscribe({
@@ -361,8 +361,12 @@ export class Observable<T> {
             subscription.unsubscribe()
           }
         },
-        error: reject,
-        complete: resolve,
+        error(error) {
+          reject(error)
+        },
+        complete() {
+          resolve(undefined)
+        }
       })
     })
   }
