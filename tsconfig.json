@@ -14,5 +14,8 @@
     "./src/index.ts",
     "./types/common.d.ts",
     "./types/symbols.d.ts"
-  ]
+  ],
+  "ts-node": {
+    "files": true
+  }
 }
