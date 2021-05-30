@@ -19,7 +19,7 @@ test("merge() works", async t => {
     (async () => {
       for (let i = 0; i < 5; i++) {
         observer.next(i)
-        await delay(20)
+        await delay(40)
       }
       observer.complete()
     })().catch(error => observer.error(error))
@@ -27,7 +27,7 @@ test("merge() works", async t => {
   const observable2 = new Observable<string>(observer => {
     (async () => {
       for (let i = 0; i < 3; i++) {
-        await delay(35)
+        await delay(70)
         observer.next(String(i))
       }
       observer.complete()
