@@ -12,8 +12,7 @@
   },
   "include": [
     "./src/index.ts",
-    "./types/common.d.ts",
-    "./types/symbols.d.ts"
+    "./types/common.d.ts"
   ],
   "ts-node": {
     "files": true
